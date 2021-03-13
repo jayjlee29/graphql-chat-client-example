@@ -43,7 +43,7 @@ export default function MessageList(props) {
 	const [authors, setAuthors] = useState([])
 	//console.log('MessageList sessionInfo', JSON.stringify(sessionInfo))
 	useEffect(()=>{
-		//scrollToBottom()
+		scrollToBottom()
 	}, []);
 	
 	const scrollToBottom = () => {
@@ -65,7 +65,7 @@ export default function MessageList(props) {
 		setMessages(messageList.map((msg, idx)=>{
 			console.log(sessionInfo.user.userId, msg.userId)
 			return new Message({
-				id: sessionInfo.user.userId === msg.userId?0:msg.id,
+				id: sessionInfo.user.id === msg.userId?0:msg.id,
 				message: msg.payload,
 				senderName: msg.userId
 			})
@@ -85,7 +85,7 @@ export default function MessageList(props) {
 				const msg = channelMessage.message[0]
 
 				const messageList = [...messages, new Message({
-					id: sessionInfo.user.userId === msg.userId?0:msg.id,
+					id: sessionInfo.user.id === msg.userId?0:msg.id,
 					message: msg.payload,
 					senderName: msg.userId
 				})]

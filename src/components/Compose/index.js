@@ -59,11 +59,12 @@ export default function Compose(props) {
 		return (
 			<div className="compose">
 			  <input
-				  id="input"
+				id="input"
 				type="text"
 				className="compose-input"
-				placeholder="Type a message, @name"
-				autoComplete={false}
+				placeholder="Type a message"
+				autoComplete="off"
+				autofocus
 				onKeyUp={(e)=>{handleChange(e);return false;}}
 			  />
 	  
@@ -76,13 +77,13 @@ export default function Compose(props) {
 		return (
 			<div className="compose">
 			  <input
-				  id="input"
+				id="input"
 				type="text"
 				className="compose-input"
 				placeholder="must select channel"
 				disabled="disabled"
 				onKeyUp={handleChange}
-				autoComplete={false}
+				autoComplete="off"
 			  />
 	  
 			  {

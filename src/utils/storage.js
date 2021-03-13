@@ -16,9 +16,16 @@ function getSession(){
     }
     return null;    
 }
+function getUserInfo(){
+    const sessionInfo = getSession()
+    if(sessionInfo && sessionInfo.user){
+        return sessionInfo.user;
+    }
 
+    return null;
+}
 function clearSession(){
     localStorage.clear();
 }
 
-export {setSession, getSession, clearSession}
+export {setSession, getSession, clearSession, getUserInfo}

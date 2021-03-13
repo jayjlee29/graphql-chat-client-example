@@ -7,7 +7,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { setContext } from '@apollo/client/link/context';
 import Signin from '../Signin'
-import {getAccessToken, signIn} from '../../apis/AuthApi'
+import {getAccessToken, signInAnonymous} from '../../apis/AuthApi'
 import {getSession, setSession, clearSession} from '../../utils/storage'
 import { SERVER_URI, WS_SERVER_URI } from '../../apis/Config'
 export default function App() {
@@ -33,8 +33,9 @@ export default function App() {
     //const token = localStorage.getItem('token');
     // return the headers to the context so httpLink can read them
     try{
+      console.log('setContext', sessionInfo)
       const {accessToken, expiredAt, user} = await getAccessToken(sessionInfo)
-      setSession({accessToken, expiredAt, user});
+      
       return {
         headers: {
           ...headers,
@@ -55,7 +56,7 @@ export default function App() {
       connectionParams: async () => {
         try{
           const {accessToken, expiredAt, user} = await getAccessToken(sessionInfo)
-          setSession({accessToken, expiredAt, user});
+          
           return {
             authToken: `Bearer ${accessToken}`
           }
@@ -92,7 +93,7 @@ export default function App() {
   
 
   const signInHandler = async ({username}) =>{
-    const {accessToken, expiredAt, user} = await signIn(username)
+    const {accessToken, expiredAt, user} = await signInAnonymous(username)
     const session = {accessToken, expiredAt, user}
     console.log('signInHandler success', session)
 	  setSession(session)
