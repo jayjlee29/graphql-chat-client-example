@@ -26,6 +26,5 @@ yarn-error.log*
 
 
 # temp
-**/Config.js
 .firebase**
 firebase**
